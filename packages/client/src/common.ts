@@ -1,3 +1,3 @@
-import {createAPIProxy} from "./util.js";
+import {createAPIProxy} from "./createWebAPIProxy.js";
 
 export const apis = createAPIProxy('http://localhost:8081/api')

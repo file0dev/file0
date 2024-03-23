@@ -1,4 +1,4 @@
-import {FsAPIs} from "./util.js";
+import {FsAPIs} from "./createWebAPIProxy.js";
 
 type Editor = {
     extensions: string[];

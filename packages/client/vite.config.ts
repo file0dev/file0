@@ -7,13 +7,12 @@ export default {
     jsxFragment: 'Fragment',
   },
   build: {
-    lib: {
-      // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'file0',
-      // the proper extensions will be added
-      fileName: 'index',
-    },
+    rollupOptions: {
+      output: {
+        entryFileNames: '[name].js',
+        assetFileNames: "[name][extname]"
+      }
+    }
   },
   plugins: [
     wyw({

@@ -3,7 +3,7 @@ import {apis} from "./common.js";
 import {LocationPanel} from "./LocationPanel.js";
 import {ColumnData, ColumnView, openItemInColumn} from "./ColumnView.js";
 import {EditorManager} from "./EditorManager.js";
-import {FsAPIs} from "./util.js";
+import {FsAPIs} from "./createWebAPIProxy.js";
 
 export type DirItem = {
     path: string,
