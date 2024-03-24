@@ -16,46 +16,11 @@ const cp = async (a, b) => fs.promises.cp(
 async function main () {
   const prod = process.argv.find(s => s.includes('--prod'))
 
-  const params = {
-    entryPoints: ['src/index.js'],
-    format: 'esm',
-    bundle: true,
-    minify: !!prod,
-    sourcemap: !prod,
-    external: ['socket:*']
-  }
-
-  const watch = process.argv.find(s => s.includes('--watch='))
-
   //
   // The second argument to this program will be the target-OS specifc
   // directory for where to copy your build artifacts
   //
   const target = path.resolve(process.env.PREFIX)
-
-  //
-  // If the watch command is specified, let esbuild start its server
-  //
-  if (watch) {
-    esbuild.serve({ servedir: path.resolve(watch.split('=')[1]) }, params)
-  }
-
-  //
-  //
-  //
-  if (!watch) {
-    await esbuild.build({
-      ...params,
-      outdir: target
-    })
-  }
-  if (process.argv.find(s => s.includes('--test'))) {
-    await esbuild.build({
-      ...params,
-      entryPoints: ['test/index.js'],
-      outdir: path.join(target, 'test')
-    })
-  }
 
   //
   // Not writing a package json to your project could be a security risk
@@ -71,9 +36,11 @@ async function main () {
   // Copy some files into the new project
   //
   await Promise.all([
-    // cp('src/index.html', target),
-    cp('src/index.css', target),
-    cp('src/icon.png', target)
+    cp('index.html', target),
+    cp('../client/dist/index.js', target),
+    cp('../client/dist/index.css', target),
+    // cp('src/index.css', target),
+    // cp('src/icon.png', target)
   ])
 }
 

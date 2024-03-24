@@ -6,11 +6,12 @@
     <meta
             http-equiv="Content-Security-Policy"
             content="
-        connect-src http://localhost:8080 ipc://* file://* socket:*;
+        connect-src 'self' http://localhost:8080 http://localhost:8081 ipc://* file://* ws://localhost:5173 socket:*;
         child-src 'none';
         img-src https: data: file:;
       "
     >
+    <link rel="stylesheet" href="/index.css" />
     <title>Title</title>
     <style>
         html, body{
@@ -22,10 +23,18 @@
             height: 100%;
         }
     </style>
-  <script type="module" crossorigin src="/index.js"></script>
-  <link rel="stylesheet" crossorigin href="/index.css">
+
+    <script type="module">
+        import application from 'socket:application'
+        application.backend.open()
+    </script>
+
 </head>
 <body>
 <div id="root"></div>
+
+<script type="module" src="/index.js"></script>
 </body>
 </html>
+
+

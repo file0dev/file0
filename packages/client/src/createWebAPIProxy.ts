@@ -21,7 +21,3 @@ export function createAPIProxy(baseUrl: string) {
     }) as {[k:string]: (...args:any) => Promise<any>}
 }
 
-export type FsAPIs = {
-    readdir: (path: string) => Promise<string[]>
-    readFile: (path: string, options?: {encoding:string}) => Promise<string>
-}

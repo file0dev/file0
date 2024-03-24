@@ -19,13 +19,13 @@
     "jsxFactory": "createElement",
     "jsxFragmentFactory": "Fragment",
     "lib": ["esnext", "dom"],
-    "types": ["node", "vitest"],
+    "types": ["node", "vitest", "@socketsupply/socket"],
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "paths": {
       "minditor": ["src"],
       "@test": ["tests"]
-    }
+    },
   },
   "include": [
     "global.d.ts",

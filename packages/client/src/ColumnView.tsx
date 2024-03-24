@@ -1,4 +1,4 @@
-import {Column, ColumnProps} from './Column';
+import {Column, ColumnProps} from './Column.js';
 import {Atom, createElement, RxList} from 'axii';
 import {DirItem} from "./App.js";
 

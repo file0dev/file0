@@ -1,9 +1,8 @@
 import {atom, createElement, RenderContext, RxList} from "axii";
-import {apis} from "./common.js";
+import {apis, FsAPIs} from "./common.js";
 import {LocationPanel} from "./LocationPanel.js";
 import {ColumnData, ColumnView, openItemInColumn} from "./ColumnView.js";
 import {EditorManager} from "./EditorManager.js";
-import {FsAPIs} from "./createWebAPIProxy.js";
 
 export type DirItem = {
     path: string,
@@ -21,19 +20,19 @@ export function App({ editorManager }: AppProps, {useLayoutEffect}: RenderContex
     let rightRef!: HTMLElement
 
     useLayoutEffect(async () => {
-        openItem({path: '/users/camus/Work/file0test', name: 'camus', type: 'dir'})
+        // openItem({path: '/Users/camus/Work/file0test', name: 'camus', type: 'dir'})
     })
 
     const fixedLocations: DirItem[] = [
         {
-            path: '/users/camus',
+            path: '/Users/camus',
             type: 'dir',
-            name: 'camus'
+            name: 'HOME1'
         },
         {
-            path: '/users/camus/downloads',
+            path: '/Users/camus/Downloads',
             type: 'dir',
-            name: 'downloads'
+            name: 'Downloads'
         }
     ]
 

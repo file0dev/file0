@@ -1,20 +1,13 @@
 {
-  "name": "app",
+  "name": "node-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "main.js",
+  "type": "module",
   "scripts": {
-    "test": "ssc build -r -o --test=./test/index.js --headless",
-    "init-project": "ssc init --config",
-    "start": "ssc build -r -o",
-    "build": "rimraf ./src && mv ../client/dist  ./src && ssc build -o"
+    "start": "ssc build -r  --port=5173"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "esbuild": "^0.20.2",
-    "rimraf": "^5.0.5"
-  },
-  "type": "module"
+  "dependencies": {
+    "@socketsupply/socket-node": "~0.1.2",
+    "vite-plugin-externalize-dependencies": "^0.12.0"
+  }
 }

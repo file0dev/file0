@@ -10,7 +10,8 @@ const fastify = Fastify({
 })
 
 await fastify.register(cors, {
-    // put your options here
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
 })
 
 
@@ -47,6 +48,12 @@ useFastAPI(fastify,{
 })
 
 fastify.listen({ port: 8081, host:'localhost' }, (err, address) => {
-    if (err) throw err
+    if (err) {
+        console.log(err)
+        throw err
+    }
     // Server is now listening on ${address}
+    console.log(`Server is now listening on ${address}`)
 })
+
+console.log('server started')

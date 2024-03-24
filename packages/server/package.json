@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.prod.json",
-    "start": "node dist/index.js",
+    "start": "node dist/index.js >> output.log",
     "dev": "npm run build && npm run start"
   },
   "author": "",
