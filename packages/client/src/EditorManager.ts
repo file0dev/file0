@@ -4,7 +4,8 @@ type Editor = {
     extensions: string[];
     manual: boolean,
     encoding: string,
-    render(...args: any[]): any
+    render(...args: any[]): any,
+    destroy?(...args: any[]): any
 }
 
 // editor 可以注册一个或者多个能打开的文件类型
@@ -35,6 +36,6 @@ export class EditorManager {
         }
 
         editor.render(container, content, apis, file)
-        return true
+        return editor
     }
 }

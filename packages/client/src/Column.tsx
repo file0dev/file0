@@ -1,17 +1,16 @@
-import {createElement, RxList} from "axii";
+import {atom, FixedCompatiblePropsType, PropsType, PropTypes, RenderContext, RxList} from "axii";
 import {DirItem} from "./App.js";
 import {Folder} from "./icons/Folder.js";
 import {File} from "./icons/File.js";
 
-export type ColumnProps = {
-    items: RxList<DirItem>,
-    onOpenItem: (item: DirItem) => void,
-    selected?: DirItem | null
+const ColumnPropTypes = {
+    items: PropTypes.rxList<DirItem>().isRequired,
 }
 
 
 
-export function Column({ items, onOpenItem }: ColumnProps) {
+export function Column(props: FixedCompatiblePropsType<typeof ColumnPropTypes>, {createElement}: RenderContext) {
+    const {items} = props as PropsType<typeof ColumnPropTypes>
     const columnStyle = {
         padding: '8px 0',
     }
@@ -22,16 +21,16 @@ export function Column({ items, onOpenItem }: ColumnProps) {
         userSelect: 'none',
     }
 
-    const itemsWithUniqueMatch = items.createUniqueMatch()
+    const selectedItem = atom<DirItem>(null)
+    const itemsWithUniqueMatch = items.createSelection(selectedItem)
 
     const onDoubleClick = (item: DirItem) => {
-        itemsWithUniqueMatch.set(item)
-        onOpenItem(item)
+        selectedItem(item)
     }
 
     return (
-        <div style={columnStyle}>
-            {itemsWithUniqueMatch.map((selected, item) => {
+        <div as="root" style={columnStyle}>
+            {itemsWithUniqueMatch.map(([item, selected]) => {
                 const itemStyle = () => ({
                     background: selected() ? '#2f5aae' : 'transparent',
                     padding: '4px 8px',
@@ -40,16 +39,19 @@ export function Column({ items, onOpenItem }: ColumnProps) {
                     borderRadius: 4,
                     cursor: 'pointer',
                     '&:hover': {
-                        background: '#1e1e1e',
+                        background: selected() ? '#2f5aae' :'#1e1e1e',
                     },
                     userFocus: 'none',
                     userSelect: 'none',
+                    '-webkit-user-select': 'none', // safari
                     display: 'flex',
                     alignItems: 'center',
                 })
                 return (
-                    <div style={itemStyle} onClick={() => itemsWithUniqueMatch.set(item)} ondblclick={() => onDoubleClick(item)}>
-                        {item.type=== 'dir' ? <Folder size={20} /> : <File size={20}/>}
+                    <div as="item" prop:item={item} style={itemStyle} onClick={() => selectedItem(item)} ondblclick={() => selectedItem(item)}>
+                        <span style={{width:20, textAlign:'center'}}>
+                            {item.type=== 'dir' ? <Folder size={20} /> : <File size={16}/>}
+                        </span>
                         <span style={nameStyle}>
                             {item.name}
                         </span>
@@ -59,3 +61,4 @@ export function Column({ items, onOpenItem }: ColumnProps) {
         </div>
     )
 }
+Column.propTypes = ColumnPropTypes

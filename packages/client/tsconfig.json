@@ -7,7 +7,7 @@
     "newLine": "LF",
     "useDefineForClassFields": false,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowJs": true,
     "strict": true,
     "noUnusedLocals": false,
@@ -23,7 +23,6 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "paths": {
-      "minditor": ["src"],
       "@test": ["tests"]
     },
   },
@@ -33,13 +32,8 @@
     "jsx.d.ts",
     "experiment/**/*",
     "editor.tsx",
-    "tests/**/*",
     "index.tsx",
-    "dev.tsx",
-    "react.tsx",
-    "react-calendar.tsx",
     "readme.tsx",
-    "site/**/*",
     "vitestExtend.d.ts",
     "__test__",
     "vite.prod.config.ts"
