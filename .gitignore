@@ -29,4 +29,5 @@ coverage
 .next
 package-lock.json
 playground
+packages/app/build
 
